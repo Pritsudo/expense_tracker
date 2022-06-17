@@ -1,11 +1,14 @@
 import 'package:expense_tracker/screens/login.dart';
 import 'package:expense_tracker/widgets/addNewCard.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import './widgets/displayed_card.dart';
 import './widgets/TextInputField.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
+  await Firebase.initializeApp();
 }
 
 class MyApp extends StatelessWidget {
@@ -15,7 +18,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+     
+      title: 'Expenses App',
       theme: ThemeData(
         textTheme: const TextTheme(
             headline1: TextStyle(fontSize: 16, fontWeight: FontWeight.bold)),
@@ -24,11 +28,17 @@ class MyApp extends StatelessWidget {
         buttonColor: const Color.fromARGB(255, 247, 247, 161),
       ),
       home: LoginScreen(),
+
+       routes: {
+        LoginScreen.routeName: (context) => LoginScreen(),
+        HomePage.routeName:(context) => HomePage(),
+      },
     );
   }
 }
 
 class HomePage extends StatelessWidget {
+  static const routeName = 'homepgae';
   final TextEditingController _titleController = TextEditingController();
   final TextEditingController _priceController = TextEditingController();
 
@@ -41,7 +51,8 @@ class HomePage extends StatelessWidget {
           return GestureDetector(
             onTap: () {},
             child: AddNewCard(
-                title: 'dddddddd', titleController: _titleController,priceController: _priceController),
+                titleController: _titleController,
+                priceController: _priceController),
           );
         });
   }

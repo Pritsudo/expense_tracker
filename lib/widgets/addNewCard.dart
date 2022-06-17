@@ -3,12 +3,12 @@ import 'package:flutter/material.dart';
 import 'package:expense_tracker/widgets/TextInputField.dart';
 
 class AddNewCard extends StatelessWidget {
-  final String title;
+ 
   final TextEditingController titleController;
   final TextEditingController priceController;
   const AddNewCard({
     Key? key,
-    required this.title,
+  
     required this.titleController,
     required this.priceController,
   }) : super(key: key);
@@ -24,7 +24,7 @@ class AddNewCard extends StatelessWidget {
           children: [
             TextInputField(title: 'Title', titleController: titleController),
             TextInputField(title: 'Price', titleController: priceController,isNumber: true,),
-            
+
           ],
         )
            
