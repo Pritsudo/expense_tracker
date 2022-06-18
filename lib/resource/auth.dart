@@ -1,26 +1,29 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:flutter/cupertino.dart';
 
-class Authentication {
+
+class Authentication with ChangeNotifier {
   var responce = '';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
+ String  get userId {
+   return _auth.currentUser!.uid;
+  }
+
   Future<String> loginUser(String email, String password) async {
     responce = 'Some error occur';
     try {
-      if(email.isNotEmpty || password.isNotEmpty)
-      {
-       await _auth.signInWithEmailAndPassword(
-          email: email, password: password);
-          responce='Success';
-
-      }
-      else{
-        responce='Please enter all fields';
+      if (email.isNotEmpty || password.isNotEmpty) {
+        await _auth.signInWithEmailAndPassword(
+            email: email, password: password);
+        responce = 'Success';
+      } else {
+        responce = 'Please enter all fields';
       }
     } catch (err) {
-      responce=err.toString();
+      responce = err.toString();
     }
     return responce;
   }
@@ -37,13 +40,13 @@ class Authentication {
           'uid': user.uid,
         });
         responce = 'Success';
-      }
-       else{
-        responce='Please enter all fields';
+      } else {
+        responce = 'Please enter all fields';
       }
     } catch (err) {
       responce = err.toString();
     }
     return responce;
   }
+  
 }

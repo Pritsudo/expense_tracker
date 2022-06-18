@@ -1,7 +1,8 @@
-import 'package:expense_tracker/main.dart';
-import 'package:expense_tracker/resource/utils.dart';
 import 'package:flutter/material.dart';
+
+import 'package:expense_tracker/resource/utils.dart';
 import '../widgets/TextInputField.dart';
+import 'HomePage.dart';
 import '../resource/auth.dart';
 
 class LoginScreen extends StatefulWidget {

@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 class Cards extends StatelessWidget {
-  final String title;
-  final double price;
-  const Cards({Key? key, required this.price, required this.title})
+  
+  final snap;
+  const Cards({Key? key, required this.snap})
       : super(key: key);
 
   @override
@@ -15,12 +15,12 @@ class Cards extends StatelessWidget {
         margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
         child: ListTile(
             title: Text(
-            title,
+            snap['title'],
             style: TextStyle(fontSize: 16),
           ),
           subtitle: Text('THis is subtitle dsiudisd'),
           trailing: Text(
-            '\₹ ${price.toString()}',
+            '\₹ ${snap['price']}',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
         ),
