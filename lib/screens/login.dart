@@ -73,10 +73,10 @@ class _LoginScreenState extends State<LoginScreen> {
                     child: Column(
                       children: [
                         TextInputField(
-                            title: 'email', titleController: _emailController),
+                            title: 'email', controller: _emailController),
                         TextInputField(
                             title: 'Password',
-                            titleController: _passwordController),
+                            controller: _passwordController),
                         SizedBox(
                           height: 10,
                         ),

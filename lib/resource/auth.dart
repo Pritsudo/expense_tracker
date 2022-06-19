@@ -2,17 +2,17 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 
-
 class Authentication with ChangeNotifier {
   var responce = '';
   final FirebaseAuth _auth = FirebaseAuth.instance;
   final FirebaseFirestore _firestore = FirebaseFirestore.instance;
 
- String  get userId {
-   return _auth.currentUser!.uid;
+  String get userId {
+    return _auth.currentUser!.uid;
   }
 
   Future<String> loginUser(String email, String password) async {
+
     responce = 'Some error occur';
     try {
       if (email.isNotEmpty || password.isNotEmpty) {
@@ -48,5 +48,8 @@ class Authentication with ChangeNotifier {
     }
     return responce;
   }
-  
+
+  Future<void> signOut() async {
+    await _auth.signOut();
+  }
 }

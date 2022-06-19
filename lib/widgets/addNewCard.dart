@@ -9,11 +9,14 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:uuid/uuid.dart';
 
 class AddNewCard extends StatefulWidget {
-  final TextEditingController titleController;
+  final TextEditingController titlecontroller;
   final TextEditingController priceController;
+  final TextEditingController descriptionController;
+
   const AddNewCard({
     Key? key,
-    required this.titleController,
+    required this.descriptionController,
+    required this.titlecontroller,
     required this.priceController,
   }) : super(key: key);
 
@@ -29,8 +32,9 @@ class _AddNewCardState extends State<AddNewCard> {
   Widget build(BuildContext context) {
     String userId = Provider.of<Authentication>(context).userId;
 
-    void saveCards(String title, String price) async {
+    void saveCards(String title, String price, String description) async {
       String cardId = Uuid().v1();
+      DateTime dateTime = DateTime.now();
       setState(() {
         _isLoading = true;
       });
@@ -45,13 +49,17 @@ class _AddNewCardState extends State<AddNewCard> {
             'cardId': cardId,
             'title': title,
             'price': price,
+            'description':description,
+            'SavedDate': dateTime,
           });
 
           responce = 'Uploaded Successfully';
 
-          widget.titleController.text = '';
+          widget.titlecontroller.text = '';
+          widget.descriptionController.text = '';
           widget.priceController.text = '';
-        } else {
+        } 
+        else {
           responce = 'Please fill both field';
         }
       } catch (err) {
@@ -61,6 +69,8 @@ class _AddNewCardState extends State<AddNewCard> {
       setState(() {
         _isLoading = false;
       });
+
+      Navigator.of(context).pop();
     }
 
     return _isLoading
@@ -73,15 +83,17 @@ class _AddNewCardState extends State<AddNewCard> {
             child: Column(
               children: [
                 TextInputField(
-                    title: 'Title', titleController: widget.titleController),
+                    title: 'Title', controller: widget.titlecontroller),
+                TextInputField(
+                    title: 'Description', controller: widget.descriptionController),
                 TextInputField(
                   title: 'Price',
-                  titleController: widget.priceController,
+                  controller: widget.priceController,
                   isNumber: true,
                 ),
                 ElevatedButton(
-                    onPressed: () => saveCards(widget.titleController.text,
-                        widget.priceController.text),
+                    onPressed: () => saveCards(widget.titlecontroller.text,
+                        widget.priceController.text, widget.descriptionController.text),
                     child: Text('Save'))
               ],
             ));

@@ -8,9 +8,11 @@ class Cards extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return SizedBox(
       height: 100,
       child: Card(
+      
         elevation: 2,color:Color.fromARGB(255, 173, 173, 145),
         margin: EdgeInsets.symmetric(horizontal: 10,vertical: 5),
         child: ListTile(
@@ -18,7 +20,7 @@ class Cards extends StatelessWidget {
             snap['title'],
             style: TextStyle(fontSize: 16),
           ),
-          subtitle: Text('THis is subtitle dsiudisd'),
+          subtitle: Text(snap['description']),
           trailing: Text(
             '\₹ ${snap['price']}',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
